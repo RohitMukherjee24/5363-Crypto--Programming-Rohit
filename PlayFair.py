@@ -23,7 +23,7 @@ class StringManip:
 		return alphabet
 
 
-	def cleanString(self,s,options = {'up':1,'reNonAlphaNum':1,'reSpaces':'_','spLetters':'X'}):
+	def cleanString(self,s,options = {'up':1,'reNonAlphaNum':1,'reSpaces':'_','spLetters':'X','alphanum':1}):
 		"""
 		Cleans message by doing the following:
 		- up            - uppercase letters
@@ -31,7 +31,6 @@ class StringManip:
 		- reSpaces      - replace spaces with some char or '' for removing spaces
 		- reNonAlphaNum - remove non alpha numeric
 		- reDupes       - remove duplicate letters
-
 		@param   string -- the message
 		@returns string -- cleaned message
 		"""
@@ -51,7 +50,10 @@ class StringManip:
 		
 		if 'reDupes' in options:
 			s= ''.join(sorted(set(s), key=s.index))
-
+		
+		if 'alphanum' in options:
+			s = re.sub(r'[^A-Za-z]', '', s)
+		
 		return s
 
 
@@ -59,7 +61,6 @@ class PlayFair:
 	"""
 	Class to encrypt via the PlayFair cipher method
 	Methods:
-
 	- generateSquare
 	- transposeSquare
 	-
@@ -79,7 +80,6 @@ class PlayFair:
 	def generateSquare(self):
 		"""
 		Generates a play fair square with a given keyword.
-
 		@param   string   -- the keyword
 		@returns nxn list -- 5x5 matrix
 		"""
@@ -92,7 +92,7 @@ class PlayFair:
 		self.Alphabet = self.StrMan.generateAlphabet()
 
 		#uppercase key (it meay be read from stdin, so we need to be sure)
-		self.Key = self.StrMan.cleanString(self.Key,{'up':1,'reSpaces':'','reNonAlphaNum':1,'reDupes':1})
+		self.Key = self.StrMan.cleanString(self.Key,{'up':1,'reSpaces':'','reNonAlphaNum':1,'reDupes':1,'alphanum':1})
 
 		#Load keyword into square
 		for i in range(len(self.Key)):
@@ -118,7 +118,6 @@ class PlayFair:
 	def transposeSquare(self):
 		"""
 		Turns columns into rows of a cipher square
-
 		@param   list2D -- playFair square
 		@returns list2D -- square thats transposed
 		"""
@@ -134,7 +133,6 @@ class PlayFair:
 		"""
 		Turns a given digraph into its encoded digraph whether its on
 		the same row, col, or a square
-
 		@param   list -- digraph
 		@returns list -- encoded digraph
 		"""
@@ -170,7 +168,6 @@ class PlayFair:
 		"""
 		Turns a given digraph into its DECODED digraph whether its on
 		the same row, col, or a square
-
 		@param   list -- digraph
 		@returns list -- DECODED digraph
 		here  handled the array index 0 which is hard coded as points to array index 4.
@@ -265,8 +262,6 @@ In the encoding block asked for message and key and then we cleaned the message 
 spacses etc.chekcked if the lenght of the message is odd, if odd then append X at the end of message.using he while
 loop we had called getcodeddigraph which is appended with 2 charactes each in the message.In the decoding block we had
 used the method get decoded.
-
-
 """
 if __name__ == "__main__":
 	print("\nPlayfair Encryption Tool (P.E.T)\n  Written By: (Rohit Mukherjee)")
@@ -287,8 +282,7 @@ if(inputval == '1'):
 	print("*****************************")
 	myCipher = PlayFair(key,message)
 	#cleaning Message 
-	myCipher.Message = myCipher.StrMan.cleanString(myCipher.Message,{'up':1,'reSpaces':'','reNonAlphaNum':1,'spLetters':'1'})
-	print(myCipher.Message)
+	myCipher.Message = myCipher.StrMan.cleanString(myCipher.Message,{'up':1,'reSpaces':'','reNonAlphaNum':1,'spLetters':'1','alphanum':1})
 	#if Message is odd then append X to the message
 	if len(myCipher.Message)%2==1:
 		myCipher.Message += 'X'
@@ -314,7 +308,7 @@ elif(inputval == "2"):
 	key = input("Please enter a keyword:\n " )
 	print("*****************************")
 	myCipher = PlayFair(key,message)
-	myCipher.Message = myCipher.StrMan.cleanString(myCipher.Message,{'up':1,'reSpaces':'','reNonAlphaNum':1 })
+	myCipher.Message = myCipher.StrMan.cleanString(myCipher.Message,{'up':1,'reSpaces':'','reNonAlphaNum':1,'alphanum':1})
 	Text1 = ""
 	Temp1 = ""
 	i = 0
@@ -324,12 +318,11 @@ elif(inputval == "2"):
 		i += 2
 	# used this for removing last letter X but if X is real message then its messedup,
 	# cant able to figure out how to check X is real or not
-	#if len(Text1)%2==0:
-	#	Text1 = Text1[:-1]
+	if len(Text1) % 2==0 and Text1.endswith('X'):
+		Text1 = Text1[:-1]
 	print("\nPlayfair Encryption Tool (P.E.T)\n  Written By: (Rohit Mukherjee)")
 	print("*****************************")
 	print('Your decrypted message is:\n' + Text1)
 	print("*****************************")
 elif(inputval == "3"):
 	exit()
-	
