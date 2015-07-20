@@ -1,3 +1,10 @@
+"""
+purpose:   Input file is readed line by line and sep.erate words are compared with dictionary words if words are present then increment the count
+           if line count is more than the previous line count then replace the maxcount and print the maxcount line
+Name:      Rohit Mukherjee
+
+"""
+
 import fractions
 import cryptoMath
 import os
