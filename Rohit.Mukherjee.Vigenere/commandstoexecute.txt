@@ -1,0 +1,2 @@
+python main.py -m encrypt -i plainText.txt -o encryptedText.txt -s 7487383487438734
+python main.py -m decrypt -i encryptedText.txt -o decryptedText.txt -s 7487383487438734
