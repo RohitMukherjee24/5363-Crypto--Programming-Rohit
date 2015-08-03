@@ -70,9 +70,10 @@ def curve(x1,y1,x2,y2,a,b):
         plt.contour(x.ravel(), y.ravel(), pow(y, 2) - ( pow(x, 3) - a*x + b ), [0])
     
     if((x1!=x2)and(y1!=y2)):
-      m = (y2-y1)/(x2-x1)
+      m = float(y2-y1)/(x2-x1)
     else:
-      m = (3*x1*x1+a)/(2*y1)
+      m = float(3*x1*x1+a)/(2*y1)
+      print("slope is:",m)
     x3 = Finding_X3(x1,x2,m)
     y3 = Finding_Y3(x1,x3,y1,m)
     x3=round(x3,3)    
