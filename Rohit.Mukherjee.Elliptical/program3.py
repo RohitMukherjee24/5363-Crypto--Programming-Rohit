@@ -22,15 +22,17 @@ def Finding_Y3(x1,x3,y1,m):
      
 # used to find if (x1,y1) and (x2,y2) are passing through the curve
 def  x1_y1_valid(x1,y1,a,b):
-    if((pow(y1, 2) - ( pow(x1, 3) - a*x1 + b )) == 0):
+    #print((pow(y1, 2) - ( pow(x1, 3) + a*x1 + b )))
+    if((pow(y1, 2) - ( pow(x1, 3) + a*x1 + b )) == 0.0):
         return True
     else:
         return False
 def  x2_y2_valid(x2,y2,a,b):
-    if((pow(y2, 2) - ( pow(x2, 3) - a*x2 + b )) == 0):
+    #print((pow(y2, 2) - ( pow(x2, 3) + a*x2 + b )))
+    if((pow(y2, 2) - ( pow(x2, 3) + a*x2 + b )) == 0.0):
         return True
     else:
-        return False      
+        return False   
        
 
 # used to display the curve and points(x1,y1) , (x2,y2)and (x3,y3)
@@ -44,7 +46,7 @@ def curve(x1,y1,x2,y2,a,b):
     #To verify whether the two given points lies in the curve.    
     valid1 =x1_y1_valid(x1,y1,a,b)
     valid2 =x2_y2_valid(x2,y2,a,b)
-    
+    #print(valid1,valid2)
     if((valid1 and valid2)==True):
         print("x and y passes through that curve")
     elif((valid1 or valid2)==False):
@@ -64,10 +66,8 @@ def curve(x1,y1,x2,y2,a,b):
     # 3rd parameter:  pow(y, 2) - ( pow(x, 3) - x + 1 ) to all the
     # values in x and y.
     # The .ravel method turns the x and y grids into single dimensional arrays
-    if(a!=0):    
-        plt.contour(x.ravel(), y.ravel(), pow(y, 2) - ( pow(x, 3) - x + 1 ), [0])
-    elif(a==0):
-        plt.contour(x.ravel(), y.ravel(), pow(y, 2) - ( pow(x, 3) - a*x + b ), [0])
+    
+    plt.contour(x.ravel(), y.ravel(), pow(y, 2) - ( pow(x, 3) - a*x + b ), [0])
     
     if((x1!=x2)and(y1!=y2)):
       m = float(y2-y1)/(x2-x1)
@@ -106,7 +106,7 @@ def curve(x1,y1,x2,y2,a,b):
     
     # I hard coded the third point, YOU will use good ol mathematics to find
     # the third point
-    print(x3,y3)    
+    #print(x3,y3)    
     plt.plot(x3, y3,'yo')
     
     # Annotate point 3
