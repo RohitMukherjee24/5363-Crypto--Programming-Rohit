@@ -12,10 +12,10 @@ def main():
 
     parser.add_argument("-a", dest="a",type=float, help="Part 'a' of elliptical curve: y^2 = x^3 + ax + b")
     parser.add_argument("-b", dest="b",type=float, help="Part 'b' of elliptical curve: y^2 = x^3 + ax + b")
-    parser.add_argument("-x1",dest="x1",type=float, help="")
-    parser.add_argument("-y1",dest="y1",type=float, help="")
-    parser.add_argument("-x2",dest="x2",type=float, help="")
-    parser.add_argument("-y2",dest="y2",type=float, help="")
+    parser.add_argument("-x1",dest="x1",type=Fraction, help="")
+    parser.add_argument("-y1",dest="y1",type=Fraction, help="")
+    parser.add_argument("-x2",dest="x2",type=Fraction, help="")
+    parser.add_argument("-y2",dest="y2",type=Fraction, help="")
 
     args = parser.parse_args()
 
